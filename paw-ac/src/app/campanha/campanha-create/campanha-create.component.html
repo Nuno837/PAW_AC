@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="enteredTitle">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput rows="2" [(ngModel)]="enteredContent" ></textarea>
+  </mat-form-field>
+  <button
+  mat-raised-button
+  color=""
+  (click)="onAddCampanha()">Guardar Campanha</button>
+</mat-card>

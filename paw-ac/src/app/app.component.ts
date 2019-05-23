@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'paw-ac';
+  storedCampanhas = [];
+
+  onCampanhaAdded(campanha){
+    this.storedCampanhas.push(campanha);
+  }
 }
