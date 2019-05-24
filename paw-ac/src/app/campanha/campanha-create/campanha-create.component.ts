@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Campanha } from 'src/app/models/campanha.model'
+import { CampanhaService } from 'src/app/services/campanha.service';
 
 @Component({
   selector: 'app-campanha-create',
@@ -14,6 +16,7 @@ export class CampanhaCreateComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    public campanhaService: CampanhaService,
   ) {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
@@ -22,13 +25,13 @@ export class CampanhaCreateComponent {
   }
 
   onAddCampanha() {
-    const campanha = {
-      title: this.criarCampanha.value.enteredTitle,
-      description: this.criarCampanha.value.enteredContent
-    };
+    this.campanhaService.addCampanha(
+      this.criarCampanha.value.title,
+      this.criarCampanha.value.description
+    );
     console.log(this.criarCampanha.value.enteredTitle);
 
-    this.campanhaCreated.emit(campanha);
+    this.campanhaCreated.emit(Campanha);
 
   }
 }
