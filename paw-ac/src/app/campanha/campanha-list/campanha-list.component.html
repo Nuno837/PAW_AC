@@ -1,5 +1,7 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-accordion multi="true" *ngIf="campanhas.length > 0">
   <mat-expansion-panel *ngFor="let campanha of campanhas">
+    <h2>Campanhas</h2>
     <mat-expansion-panel-header>
       {{campanha.title}}
     </mat-expansion-panel-header>
