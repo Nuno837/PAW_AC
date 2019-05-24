@@ -1,1 +1,28 @@
-<mat-toolbar color="warn">Toolbar</mat-toolbar>
+<mat-toolbar color="warn">
+  <i class="material-icons" md-48>
+      home
+      </i>
+<span>
+  <a>  No Name Yeat</a>
+</span>
+<span class="spacer"></span>
+<ul>
+  <li >
+    <a mat-button ><i class="material-icons">
+      dns
+      </i> Listagem Campanhas</a>
+  </li>
+  <li>
+      <a mat-button><i class="material-icons">event_available</i> Criar Campanha</a>
+    </li>
+  <button mat-button>
+    <i class="material-icons">account_circle</i>
+    Login/Registo
+  </button>
+  <mat-menu #menu="matMenu" xPosition="after">
+    <button mat-menu-item >Login</button>
+    <button mat-menu-item >Registar</button>
+    <button mat-menu-item >Logout</button>
+  </mat-menu>
+</ul>
+</mat-toolbar>
