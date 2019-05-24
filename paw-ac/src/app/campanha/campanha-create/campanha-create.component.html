@@ -1,12 +1,20 @@
+<h2>Crie uma Campanha</h2>
 <mat-card>
+    <form [formGroup]="criarCampanha" (ngSubmit)="onAddCampanha()">
   <mat-form-field>
-    <input matInput type="text" [(ngModel)]="enteredTitle">
+      <h4><i class="material-icons">
+          dashboard
+          </i> Nome da Campanha</h4>
+    <input matInput type="text" formControlName="enteredTitle">
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput rows="2" [(ngModel)]="enteredContent" ></textarea>
+      <h4><i class="material-icons">
+          dashboard
+          </i> Descrição da Campanha</h4>
+    <textarea matInput rows="2" formControlName="enteredContent" ></textarea>
   </mat-form-field>
-  <button
-  mat-raised-button
-  color=""
-  (click)="onAddCampanha()">Guardar Campanha</button>
+  <button mat-raised-button color="" type="submit">
+      Criar Campanha
+    </button>
+</form>
 </mat-card>
