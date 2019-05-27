@@ -7,6 +7,10 @@
           </i> Nome da Campanha</h4>
     <input matInput type="text" formControlName="title">
   </mat-form-field>
+  <div>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">Escolha o Logo</button>
+    <input type="file" #filePicker>
+  </div>
   <mat-form-field>
       <h4><i class="material-icons">
           dashboard
