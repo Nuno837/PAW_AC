@@ -10,12 +10,16 @@ import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-cre
 import { HeaderComponent } from './header/header.component';
 import {CampanhaListComponent} from './campanha/campanha-list/campanha-list.component';
 import { AngularMaterialModule } from './angular-material.module';
+import { DonationsCreateComponent } from './donations/donations-create.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CampanhaCreateComponent,
     CampanhaListComponent,
+    DonationsCreateComponent,
+    LoginComponent,
     HeaderComponent
   ],
   imports: [
