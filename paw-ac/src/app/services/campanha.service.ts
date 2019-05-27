@@ -6,6 +6,11 @@ import { Injectable } from '@angular/core';
 export class CampanhaService {
   private campanhas: Campanha[] = [];
 
+  getCampanha() {
+
+  }
+
+
   addCampanha(
     title: string,
     description: string

@@ -12,7 +12,7 @@ export class CampanhaCreateComponent {
   enteredContent = '';
   enteredTitle = '';
   public criarCampanha: FormGroup;
-  @Output() campanhaCreated = new EventEmitter();
+  imagePreview: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,8 +20,20 @@ export class CampanhaCreateComponent {
   ) {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      image: ['', [Validators.required]]
     });
+  }
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.criarCampanha.patchValue({image: file});
+    this.criarCampanha.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 
   onAddCampanha() {
@@ -29,9 +41,7 @@ export class CampanhaCreateComponent {
       this.criarCampanha.value.title,
       this.criarCampanha.value.description
     );
-    console.log(this.criarCampanha.value.enteredTitle);
-
-    this.campanhaCreated.emit(Campanha);
+    console.log(this.criarCampanha);
 
   }
 }
