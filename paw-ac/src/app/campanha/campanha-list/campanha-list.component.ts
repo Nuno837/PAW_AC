@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CampanhaService } from '../../services/campanha.service';
+import { Campanha } from '../../models/campanha.model';
 
 @Component({
   selector: 'app-campanha-list',
@@ -6,5 +8,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./campanha-list.component.css']
 })
 export class CampanhaListComponent {
-  @Input() campanhas = [];
+   campanhas: Campanha[] = [];
+
+   constructor(
+    public campanhaService: CampanhaService
+   ) {}
+
+   ngOnInit() {
+   }
 }
