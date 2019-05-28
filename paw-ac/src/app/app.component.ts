@@ -7,8 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   storedCampanhas = [];
+  storedDonations= [];
 
   onCampanhaAdded(campanha){
     this.storedCampanhas.push(campanha);
+  }
+  onDonationAdded(donation){
+    this.storedDonations.push(donation);
   }
 }
