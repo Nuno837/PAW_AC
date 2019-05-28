@@ -10,16 +10,16 @@
   </mat-form-field>
   <div>
     <button mat-stroked-button type="button" (click)="filePicker.click()">Escolha o Logo</button>
-    <input type="file" #filePicker (change)="onImagePicked($event)">
+    <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="image">
   </div>
   <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
-    <img [src]="imagePreview" [alt]="criarCampanha.value.title">
+    <img [src]="imagePreview" [alt]="criarCampanha.value.title" >
   </div>
   <mat-form-field>
       <h4><i class="material-icons">
           dashboard
           </i> Descrição da Campanha</h4>
-    <textarea matInput rows="2" formControlName="description" ></textarea>
+    <textarea matInput rows="2" formControlName="description"></textarea>
     <mat-error *ngIf="criarCampanha.get('title').invalid">Insira uma descrição</mat-error>
   </mat-form-field>
   <button mat-raised-button color="" type="submit">

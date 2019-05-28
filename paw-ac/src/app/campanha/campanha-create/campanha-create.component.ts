@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Campanha } from 'src/app/models/campanha.model'
+import { Campanha } from 'src/app/models/campanha.model';
 import { CampanhaService } from 'src/app/services/campanha.service';
 
 @Component({
@@ -9,9 +9,11 @@ import { CampanhaService } from 'src/app/services/campanha.service';
   styleUrls: ['./campanha-create.component.css']
 })
 export class CampanhaCreateComponent {
-  enteredContent = '';
-  enteredTitle = '';
+
   public criarCampanha: FormGroup;
+
+  campanhas: any[];
+
   imagePreview: string;
 
   constructor(
@@ -20,14 +22,14 @@ export class CampanhaCreateComponent {
   ) {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      image: ['', [Validators.required]]
+      image: ['', [Validators.required]],
+      description: ['', [Validators.required]]
     });
   }
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.criarCampanha.patchValue({image: file});
+    this.criarCampanha.patchValue({imagePreview: file});
     this.criarCampanha.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -39,6 +41,7 @@ export class CampanhaCreateComponent {
   onAddCampanha() {
     this.campanhaService.addCampanha(
       this.criarCampanha.value.title,
+      this.criarCampanha.value.image,
       this.criarCampanha.value.description
     );
     console.log(this.criarCampanha);

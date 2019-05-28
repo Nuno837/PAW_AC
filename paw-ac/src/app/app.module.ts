@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule} from '@angular/forms';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-create.component';
@@ -26,7 +27,8 @@ import { AngularMaterialModule } from './angular-material.module';
     NavbarModule,
     WavesModule,
     ButtonsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

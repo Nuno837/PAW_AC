@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 
 const mongoose = require('mongoose');
 
+const campanhaRoutes = require('./routes/campanha');
+
 const app = express();
 
-mongoose.connect('mongodb+srv://fino:TembTk0xzCPI8WCs@cluster0-owlwd.mongodb.net/test?retryWrites=true', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://fino:TembTk0xzCPI8WCs@cluster0-owlwd.mongodb.net/cenas?retryWrites=true', { useNewUrlParser: true })
 .then(() => {
   console.log('Connected to database!');
 })
@@ -24,9 +26,11 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
   next();
 });
+
+app.use('/api/campanhas', campanhaRoutes);
 
 module.exports = app;
