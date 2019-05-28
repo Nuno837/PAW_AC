@@ -1,0 +1,81 @@
+<h2>Crie uma Campanha</h2>
+<mat-card>
+    <form [formGroup]="criarCampanha" (ngSubmit)="onAddCampanha()">
+        <mat-form-field>
+            <h4><i class="material-icons">
+                    person_outline
+                </i> Nome Completo</h4>
+            <input matInput type="text" formControlName="nome" minlength="3" required>
+            <mat-error *ngIf="criarCampanha.get('nome').invalid">Insira um nome</mat-error>
+        </mat-form-field>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">account_circle</i> Username</h4>
+                        <input matInput formControlName="username" minlength="2" placeholder="" required>
+                        <mat-error *ngIf="criarCampanha.get('username').invalid">Insira um username</mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">lock_outline</i>
+                            Password</h4>
+                        <input matInput type="password" placeholder="" formControlName="password" minlength="3"
+                            maxlength="16" required>
+                        <mat-error *ngIf="criarCampanha.get('password').invalid">Insira uma password</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">weekend</i> Endereço</h4>
+                        <textarea matInput formControlName="endereco" minlength="2" placeholder=""></textarea>
+                        <mat-error *ngIf="criarCampanha.get('endereco').invalid">Insira um endereço</mat-error>
+
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">room</i>
+                            Latitude/Longitude</h4>
+                        <input matInput ngModel placeholder="" formControlName="latlng">
+                        <mat-error *ngIf="criarCampanha.get('latlng').invalid">Insira uma Latitude e Longitude
+                        </mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">credit_card</i> IBAN</h4>
+                        <input matInput formControlName="iban" minlength="21" maxlength="21" placeholder="">
+                        <mat-error *ngIf="criarCampanha.get('iban').invalid">Insira um IBAN válido</mat-error>
+
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="removespac">
+                        <h4><i class="material-icons">info</i>
+                            NIF</h4>
+                        <input matInput placeholder="" formControlName="nif" minlength="9" maxlength="9" />
+                        <mat-error *ngIf="criarCampanha.get('nif').invalid">Insira um NIF válido</mat-error>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+
+        <button mat-raised-button color="" type="submit">
+            Registar
+        </button>
+    </form>
+</mat-card>

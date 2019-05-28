@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,8 @@ import {CampanhaListComponent} from './campanha/campanha-list/campanha-list.comp
 import { AngularMaterialModule } from './angular-material.module';
 import { DonationsCreateComponent } from './donations/donations-create.component';
 import { LoginComponent } from './login/login.component';
+import { SignupCreateComponent } from './signup/signup.component';
+
 
 @NgModule({
   declarations: [
@@ -20,14 +22,18 @@ import { LoginComponent } from './login/login.component';
     CampanhaListComponent,
     DonationsCreateComponent,
     LoginComponent,
+    SignupCreateComponent,
     HeaderComponent
   ],
   imports: [
     BrowserModule,
+    AngularMaterialModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NavbarModule,
+    FormsModule,
     WavesModule,
     ButtonsModule,
     AngularMaterialModule

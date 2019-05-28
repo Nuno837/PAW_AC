@@ -11,13 +11,16 @@ export class CampanhaService {
   }
 
 
-  addCampanha(
+  /*addCampanha(
     title: string,
-    description: string
+    description: string,
+    id:string
   ) {
     const campanha: Campanha = {
       title,
-      description
+      description,
+      id
     };
   }
+  */
 }

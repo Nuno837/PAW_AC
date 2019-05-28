@@ -36,7 +36,7 @@ export class CampanhaCreateComponent {
     reader.readAsDataURL(file);
   }
 
-  onAddCampanha() {
+  /*onAddCampanha() {
     this.campanhaService.addCampanha(
       this.criarCampanha.value.title,
       this.criarCampanha.value.description
@@ -44,4 +44,5 @@ export class CampanhaCreateComponent {
     console.log(this.criarCampanha);
 
   }
+  */
 }
