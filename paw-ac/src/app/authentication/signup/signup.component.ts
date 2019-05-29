@@ -8,10 +8,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupCreateComponent implements OnInit, OnDestroy{
+export class SignupCreateComponent implements OnInit, OnDestroy {
   valida = true;
   constructor(
-    public authService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private formBuilder: FormBuilder
 
   ) {
@@ -26,20 +26,20 @@ export class SignupCreateComponent implements OnInit, OnDestroy{
     });
   }
   public criarUser: FormGroup;
-  private authStatusSub: Subscription;
+  private authenticationStatusSub: Subscription;
 
   ngOnInit() {
-    this.authStatusSub =  this.authService.getAuthStatusListener().subscribe(
+    this.authenticationStatusSub = this.authenticationService.getAuthenticationStatus().subscribe(
       authStatus => {
       }
     );
-   }
-   onSignup() {
+  }
+  onSignup() {
 
     if (this.criarUser.invalid) {
       return;
     }
-    this.authService.createUser(
+    this.authenticationService.createUser(
       this.criarUser.value.nome,
       this.criarUser.value.username,
       this.criarUser.value.password,
@@ -47,11 +47,11 @@ export class SignupCreateComponent implements OnInit, OnDestroy{
       this.criarUser.value.latlng,
       this.criarUser.value.iban,
       this.criarUser.value.nif
-      );
-    }
+    );
+  }
 
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
+    this.authenticationStatusSub.unsubscribe();
   }
 }
 

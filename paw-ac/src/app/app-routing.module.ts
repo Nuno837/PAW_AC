@@ -3,8 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { CampanhaListComponent } from './campanha/campanha-list/campanha-list.component';
 import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-create.component';
 import { DonationsCreateComponent } from './donations/donations-create.component';
-import { LoginComponent } from './login/login.component';
-import { SignupCreateComponent } from './signup/signup.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignupCreateComponent } from './authentication/signup/signup.component';
+
 
 const routes: Routes = [
   {path: '', component: CampanhaListComponent},

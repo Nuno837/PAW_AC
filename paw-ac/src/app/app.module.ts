@@ -12,8 +12,9 @@ import { HeaderComponent } from './header/header.component';
 import {CampanhaListComponent} from './campanha/campanha-list/campanha-list.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { DonationsCreateComponent } from './donations/donations-create.component';
-import { LoginComponent } from './login/login.component';
-import { SignupCreateComponent } from './signup/signup.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignupCreateComponent } from './authentication/signup/signup.component';
+
 
 
 @NgModule({
