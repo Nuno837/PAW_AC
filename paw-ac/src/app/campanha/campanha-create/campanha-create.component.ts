@@ -29,7 +29,7 @@ export class CampanhaCreateComponent {
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.criarCampanha.patchValue({imagePreview: file});
+    this.criarCampanha.patchValue({ imagePreview: file });
     this.criarCampanha.get('image').updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
@@ -38,7 +38,7 @@ export class CampanhaCreateComponent {
     reader.readAsDataURL(file);
   }
 
-  /*onAddCampanha() {
+  onAddCampanha() {
     this.campanhaService.addCampanha(
       this.criarCampanha.value.title,
       this.criarCampanha.value.image,
@@ -46,6 +46,7 @@ export class CampanhaCreateComponent {
     );
     console.log(this.criarCampanha);
 
+    this.criarCampanha.reset();
   }
-  */
+
 }
