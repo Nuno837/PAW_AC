@@ -6,3 +6,7 @@
 .info-text {
   text-align: center;
 }
+.alinharbut{
+  display:flex;
+  justify-content: flex-end;
+}

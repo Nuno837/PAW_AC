@@ -1,10 +1,21 @@
+<h2>Lista De Campanhas</h2>
 <mat-accordion multi="true" *ngIf="campanhas.length > 0">
   <mat-expansion-panel *ngFor="let campanha of campanhas">
-    <h2>Campanhas</h2>
     <mat-expansion-panel-header>
-      {{campanha.title}}
+      <h4>{{campanha.title}}</h4>
     </mat-expansion-panel-header>
-    <p>{{campanha.description}}</p>
+
+    <section>
+        <p> <b>Descrição:</b> {{ campanha.description }} </p>
+        <p> <b>IBAN:</b> 22222222222222222222222222 </p>
+        <p> <b>Objetivo:</b> 1000€ </p>
+  
+    </section>
+    <mat-action-row>
+      <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
+      <button mat-button color="warn">Editar Campanha</button>
+      <!--Só pode alterar a campanha quem a criou , verificar o user-->
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1"  *ngIf="campanhas.length <= 0">Sem Campanhas</p>
+<p class="info-text mat-body-1" *ngIf="campanhas.length <= 0">Sem Campanhas</p>

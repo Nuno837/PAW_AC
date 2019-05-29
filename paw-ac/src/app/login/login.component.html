@@ -4,8 +4,8 @@
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
       <input matInput name="email" ngModel type="text" placeholder="Username" autocomplete="on" #usernameInput="ngModel"
-        required >
-      <mat-error *ngIf="usernameInput.invalid">Por favor introduza um Username válido!</mat-error>
+        required>
+      <mat-error *ngIf="usernameInput.invalid">Por favor introduza um username válido!</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input type="password" name="password" ngModel matInput placeholder="Password" autocomplete="on"
