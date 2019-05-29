@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
+import { AuthenticationData } from './authentication-data-model';
+import { Subject } from 'rxjs';
 
 @Injectable({providedIn:'root'})
 export class AuthenticationService{
     private isAuthenticated= false;
     private token : string;
+    private authStatusListener = new Subject<boolean>();
 
-
+    getAuthStatusListener() {
+      return this.authStatusListener.asObservable();
+    }
 
     createUser(
         nome:string,
         username:string,
         password:string,
-        IBAN:number,
-        NIF:number,
-        endereco:string
+        endereco:string,
+        latlng: string,
+        iban:number,
+        nif:number
 
 
     ){
@@ -21,9 +27,10 @@ export class AuthenticationService{
             nome,
             username,
             password,
-            IBAN,
-            NIF,
-            endereco
+            endereco,
+            latlng,
+            iban,
+            nif
         }
 
     }
