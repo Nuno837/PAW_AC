@@ -38,7 +38,7 @@ export class CampanhaCreateComponent {
     reader.readAsDataURL(file);
   }
 
-  /*onAddCampanha() {
+  onAddCampanha() {
     this.campanhaService.addCampanha(
       this.criarCampanha.value.title,
       this.criarCampanha.value.image,
@@ -46,6 +46,6 @@ export class CampanhaCreateComponent {
     );
     console.log(this.criarCampanha);
 
+    this.criarCampanha.reset();
   }
-  */
 }
