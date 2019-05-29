@@ -46,6 +46,7 @@ export class CampanhaCreateComponent {
     );
     console.log(this.criarCampanha);
 
+    this.criarCampanha.reset();
   }
 
 }
