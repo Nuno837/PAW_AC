@@ -1,29 +1,47 @@
 <h2>Crie uma Campanha</h2>
 <mat-card>
-    <form [formGroup]="criarCampanha" (ngSubmit)="onAddCampanha()">
-  <mat-form-field>
+  <form [formGroup]="criarCampanha" (ngSubmit)="onAddCampanha()">
+    <mat-form-field class="mat-form">
       <h4><i class="material-icons">
           dashboard
-          </i> Nome da Campanha</h4>
-    <input matInput type="text" formControlName="title">
-    <mat-error *ngIf="criarCampanha.get('title').invalid">Insira um titulo</mat-error>
-  </mat-form-field>
-  <div>
-    <button mat-stroked-button type="button" (click)="filePicker.click()">Escolha o Logo</button>
-    <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="image">
-  </div>
-  <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
-    <img [src]="imagePreview" [alt]="criarCampanha.value.title" >
-  </div>
-  <mat-form-field>
+        </i> Nome da Campanha</h4>
+      <input matInput type="text" formControlName="title">
+      <mat-error *ngIf="criarCampanha.get('title').invalid">Insira um titulo</mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-stroked-button type="button"  (click)="filePicker.click()">Escolha o Logo</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="image">
+    </div>
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+      <img [src]="imagePreview" [alt]="criarCampanha.value.title">
+    </div>
+    <mat-form-field class="mat-form">
       <h4><i class="material-icons">
           dashboard
-          </i> Descrição da Campanha</h4>
-    <textarea matInput rows="2" formControlName="description"></textarea>
-    <mat-error *ngIf="criarCampanha.get('title').invalid">Insira uma descrição</mat-error>
-  </mat-form-field>
-  <button mat-raised-button color="" type="submit">
+        </i> Descrição da Campanha</h4>
+      <textarea matInput rows="2" formControlName="description"></textarea>
+      <mat-error *ngIf="criarCampanha.get('title').invalid">Insira uma descrição</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mat-form">
+      <h4><i class="material-icons">
+          dashboard
+        </i> IBAN da Campanha</h4>
+      <input matInput formControlName="iban"
+        pattern="\b[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?\b ">
+      <mat-error *ngIf="criarCampanha.get('iban').invalid">Insira um iban para a campanha</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <h4><i class="material-icons">
+          dashboard
+        </i> Objetivo monetário</h4>
+      <input class="ab" matInput type="number" formControlName="goal">
+      <mat-error *ngIf="criarCampanha.get('goal').invalid">Insira um Objetivo monetário</mat-error>
+    </mat-form-field>
+    <p></p>
+    <button mat-raised-button color="warn" type="submit">
       Criar Campanha
     </button>
-</form>
+  </form>
 </mat-card>

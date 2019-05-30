@@ -28,7 +28,9 @@ export class CampanhaService {
             return {
               id: campanha._id,
               title: campanha.title,
-              description: campanha.description
+              description: campanha.description,
+              iban: campanha.iban,
+              goal: campanha.goal
             };
           }),
           maxCampanhas: campanhasData.maxCampanhas
@@ -51,13 +53,17 @@ export class CampanhaService {
   addCampanha(
     title: string,
     image: string,
-    description: string
+    description: string,
+    iban:string,
+    goal:number
   ) {
     const campanha: Campanha = {
       id: null,
       title,
       image,
-      description
+      description,
+      iban,
+      goal
     };
     console.log(campanha);
     this.http.post<{ message: string, campanhaId: string }>(BACKEND_URL, campanha)

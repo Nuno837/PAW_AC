@@ -23,7 +23,9 @@ export class CampanhaCreateComponent {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
       image: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      iban:['', [Validators.required]],
+      goal: ['', [Validators.required]]
     });
   }
 
@@ -42,7 +44,9 @@ export class CampanhaCreateComponent {
     this.campanhaService.addCampanha(
       this.criarCampanha.value.title,
       this.criarCampanha.value.image,
-      this.criarCampanha.value.description
+      this.criarCampanha.value.description,
+      this.criarCampanha.value.iban,
+      this.criarCampanha.value.goal
     );
     console.log(this.criarCampanha);
 

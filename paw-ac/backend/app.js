@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
 const campanhaRoutes = require('./routes/campanha');
+const userR = require('./routes/user');
+
 
 const app = express();
 
@@ -32,5 +34,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/campanhas', campanhaRoutes);
+app.use('/api/user', userR);
 
 module.exports = app;

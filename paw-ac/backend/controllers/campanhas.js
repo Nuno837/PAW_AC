@@ -4,7 +4,9 @@ exports.criarCampanha = (req, res, next) => {
   const campanha = new Campanha({
     title: req.body.title,
     image: req.body.image,
-    description: req.body.description
+    description: req.body.description,
+    iban: req.body.iban,
+    goal: req.body.goal
   });
   campanha.save().then(createdCampanha => {
     res.status(201).json({

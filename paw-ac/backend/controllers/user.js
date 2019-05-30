@@ -1,18 +1,9 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
-var dateFormat = require('dateformat');
+
 
 exports.createUser = (req, res, next) => {
-
-  var jsonDate = req.body.validade;
-  var then = new Date(jsonDate);
-
-  console.log('data ' + then);
-
-  d = dateFormat(then, "mm/yyyy");
-  console.log('data ' + d);
-
 
   bcrypt.hash(req.body.password, 10 )
 
@@ -71,7 +62,7 @@ exports.userLogin = (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id
+        userid: fetchedUser._id
       });
     })
     .catch(err => {

@@ -1,5 +1,8 @@
-mat-form-field, textarea {
+ textarea {
   width: 100%;
+}
+.mat-form{
+  width:100%;
 }
 
 input[type="file"] {
@@ -13,4 +16,8 @@ input[type="file"] {
 
 .image-preview img {
   height: 100%;
+}
+
+.ab{
+ width:100%;
 }
