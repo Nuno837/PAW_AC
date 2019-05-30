@@ -29,7 +29,10 @@ export class SignupCreateComponent implements OnInit, OnDestroy {
   private authenticationStatusSub: Subscription;
 
   ngOnInit() {
-   
+    this.authenticationStatusSub = this.authenticationService.getAuthenticationStatus().subscribe(
+      authStatus => {
+      }
+    );
   }
   onSignup() {
 
