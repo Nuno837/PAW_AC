@@ -3,7 +3,7 @@
   <mat-spinner *ngIf="isLoading" color="warn"></mat-spinner>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
-      <input matInput name="email" ngModel type="text" placeholder="Username" autocomplete="on" #usernameInput="ngModel"
+      <input matInput name="username" ngModel type="text" placeholder="Username" autocomplete="on" #usernameInput="ngModel"
         required>
       <mat-error *ngIf="usernameInput.invalid">Por favor introduza um username válido!</mat-error>
     </mat-form-field>

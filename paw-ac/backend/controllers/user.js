@@ -11,8 +11,8 @@ exports.createUser = (req, res, next) => {
 
     const user = new User ({
       nome: req.body.nome,
-      username: req.body.email,
-      password: req.body.password,
+      username: req.body.username,
+      password: hash,
       endereco: req.body.endereco,
       latlng: req.body.latlng,
       iban: req.body.iban,
@@ -39,14 +39,14 @@ exports.createUser = (req, res, next) => {
 exports.userLogin = (req, res, next) => {
   let fetchedUser;
   User.findOne({ username: req.body.username})
-    .then(username => {
-      if(!username) {
+    .then(user => {
+      if(!user) {
         return res.status(401).json({
           message: 'Utilizador Não Existe'
         });
       }
-      fetchedUser = username;
-      return bcrypt.compare(req.body.password, username.password);
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
       if(!result) {

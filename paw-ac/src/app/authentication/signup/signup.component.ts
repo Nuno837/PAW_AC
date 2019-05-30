@@ -43,7 +43,7 @@ export class SignupCreateComponent implements OnInit, OnDestroy {
       this.criarUser.value.nome,
       this.criarUser.value.username,
       this.criarUser.value.password,
-      this.criarUser.value.morada,
+      this.criarUser.value.endereco,
       this.criarUser.value.latlng,
       this.criarUser.value.iban,
       this.criarUser.value.nif

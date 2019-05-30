@@ -44,7 +44,7 @@ export class AuthenticationService {
         }; this.http
             .post(USER_URL + 'signup', authenticationData)
             .subscribe(response => {
-                this.router.navigate(['/auth/login']);
+                this.router.navigate(['/login']);
             }, error => {
                 error.error.message = 'O username introduzido já se encontra registado!';
                 this.authenticationStatus.next(false);
@@ -57,7 +57,7 @@ export class AuthenticationService {
     
       getIsAuthenticated() {
         if (!this.isAuthenticated) {
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/login']);
         }
         return this.isAuthenticated;
       }
@@ -98,23 +98,23 @@ export class AuthenticationService {
               this.saveAuthenticationData(token, expirationDate, this.userid);
               if (this.userid === '5cdad7e4fde4eb2dc0eb71ef') {
                 this.admin = true;
-                this.router.navigate(['/auth/admin']);
+                this.router.navigate(['/admin']);
               } else {
                 this.router.navigate(['/']);
               }
             } else {
-              this.router.navigate(['/auth/login']);
+              this.router.navigate(['/login']);
             }
           }, error => {
             this.authenticationStatus.next(false);
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/login']);
           });
         }
     
       autoAuthenticationUser() {
         const authInformation = this.getAuthenticationData();
         if (!authInformation) {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['/login']);
           return;
         }
         const now = new Date();
@@ -130,7 +130,7 @@ export class AuthenticationService {
           }
           this.authenticationStatus.next(true);
         } else {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['/login']);
         }
       }
     
@@ -142,7 +142,7 @@ export class AuthenticationService {
         this.clearAuthenticationData();
         this.userid = null;
         this.admin = false;
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/login']);
       }
     
       private setAuthenticationTimer(expirationTimer: number) {
@@ -169,7 +169,7 @@ export class AuthenticationService {
         const expirationDate = localStorage.getItem('expiration');
         const userid = localStorage.getItem('userid');
         if (!token && !expirationDate) {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['/login']);
           return;
         }
         return {

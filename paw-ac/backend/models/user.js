@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     endereco: { type: String, required: true },
     latlng: { type: String, required: true },
     iban: { type: Number, required: true },
-    NIF: { type: Number, required: true, unique: true }
+    nif: { type: Number, required: true, unique: true }
 
 
 });
