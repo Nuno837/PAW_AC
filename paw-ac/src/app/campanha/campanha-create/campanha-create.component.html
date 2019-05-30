@@ -9,7 +9,7 @@
       <mat-error *ngIf="criarCampanha.get('title').invalid">Insira um titulo</mat-error>
     </mat-form-field>
     <div>
-      <button mat-stroked-button type="button"  (click)="filePicker.click()">Escolha o Logo</button>
+      <button mat-stroked-button type="button"  color="warn" (click)="filePicker.click()">Escolha o Logo</button>
       <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="image">
     </div>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
@@ -40,7 +40,7 @@
       <mat-error *ngIf="criarCampanha.get('goal').invalid">Insira um Objetivo monetário</mat-error>
     </mat-form-field>
     <p></p>
-    <button mat-raised-button color="warn" type="submit">
+    <button mat-stroked-button color="warn" type="submit">
       Criar Campanha
     </button>
   </form>
