@@ -50,7 +50,7 @@
             <tr>
                 <td>
                     <mat-form-field class="removespac">
-                        <input matInput formControlName="iban" minlength="21" maxlength="21" placeholder="IBAN" required>
+                        <input matInput formControlName="iban" pattern="\b[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?!(?:[ ]?[0-9]){3})(?:[ ]?[0-9]{1,2})?\b" placeholder="IBAN" required>
                         <mat-error *ngIf="criarUser.get('iban').invalid">Insira um IBAN válido</mat-error>
 
                     </mat-form-field>

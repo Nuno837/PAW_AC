@@ -1,5 +1,6 @@
 export class Donation {
-    user: string;
-    numDon : number;
-  }
-  
+  id: string;
+  user: string;
+  valor: number;
+  estado: string;
+}

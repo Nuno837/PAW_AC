@@ -1,32 +1,27 @@
 <h2>Crie uma Doação</h2>
 <mat-card>
-    <form [formGroup]="criarDonations" (ngSubmit)="onAddDonations()">
+    <form [formGroup]="criarDonations" (ngSubmit)="onAddDonation()">
         <mat-form-field>
             <h4><i class="material-icons">
                     dashboard
                 </i> Nome do Utilizador</h4>
-            <input matInput  type="text"  formControlName="user">
+            <input matInput type="text" formControlName="user">
         </mat-form-field>
 
+        <h4><i class="material-icons">
+                dashboard
+            </i> Valor:</h4>
+        <mat-form-field class="controlvalue">
+
+            <input matInput type="number" formControlName="valor">
+            <mat-error *ngIf="criarDonations.get('valor') <= 0">Insira um valor positivo</mat-error>
+
+        </mat-form-field>
+        <i class="material-icons">euro_symbol</i>
+
+        <h4><button mat-stroked-button color="warn" type="submit">
+                Criar Doação
+            </button>
+        </h4>
     </form>
-    <h4><i class="material-icons">
-            dashboard
-        </i> Valor :</h4>
-    <mat-slider class="donation-margin" [(ngModel)]="numDon" thumbLabel color="primary" tickInterval="1" min="1"
-        max="1000"></mat-slider>
-
-
-    <h4>
-        <mat-form-field class="donation-margi">
-            <input matInput type="number" [(ngModel)]="numDon">
-        </mat-form-field>
-        <i class="material-icons" id="euroicon">
-            euro_symbol
-        </i>
-    </h4>
-
-    <h4><button mat-stroked-button  color="warn" type="submit">
-            Criar Doação
-        </button>
-    </h4>
 </mat-card>

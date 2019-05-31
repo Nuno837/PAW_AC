@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const campanhaRoutes = require('./routes/campanha');
 const userR = require('./routes/user');
+const donationrouter= require('./routes/donation');
 
 
 const app = express();
@@ -35,5 +36,6 @@ app.use((req, res, next) => {
 
 app.use('/api/campanhas', campanhaRoutes);
 app.use('/api/user', userR);
+app.use('/api/donations', donationrouter)
 
 module.exports = app;

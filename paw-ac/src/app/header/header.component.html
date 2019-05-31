@@ -13,16 +13,16 @@
         </i> Listagem Campanhas</a>
     </li>
     <li>
-      <a routerLink="/create-campanha" mat-button><i class="material-icons">event_available</i> Criar Campanha</a>
+      <a routerLink="/create-campanha" *ngIf="(isAuthenticated)" mat-button><i class="material-icons">event_available</i> Criar Campanha</a>
     </li>
     <button mat-button [matMenuTriggerFor]="menu">
       <i class="material-icons">account_circle</i>
       Login/Registo
     </button>
     <mat-menu #menu="matMenu" xPosition="after">
-      <button mat-menu-item routerLink="/login">Login</button>
+      <button mat-menu-item  routerLink="/login" >Login</button>
       <button mat-menu-item routerLink="/signup">Registar</button>
-      <button mat-menu-item>Logout</button>
+      <button mat-menu-item   *ngIf="isAuthenticated" (click)="Logout()">Logout</button>
     </mat-menu>
   </ul>
 </mat-toolbar>

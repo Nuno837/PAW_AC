@@ -22,9 +22,9 @@ export class CampanhaCreateComponent {
   ) {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
-      image: ['', [Validators.required]],
+      image: [''],
       description: ['', [Validators.required]],
-      iban:['', [Validators.required]],
+      iban: ['', [Validators.required]],
       goal: ['', [Validators.required]]
     });
   }

@@ -54,9 +54,11 @@ exports.userLogin = (req, res, next) => {
           message: 'Password Errada'
         });
       }
+      console.log(fetchedUser);
+      
       const token = jwt.sign(
         {username: fetchedUser.username, userid: fetchedUser._id},
-        process.env.JWT_KEY,
+        'process.env.JWT_KEY',
         {expiresIn: '1h'}
       );
       res.status(200).json({
@@ -66,6 +68,8 @@ exports.userLogin = (req, res, next) => {
       });
     })
     .catch(err => {
+        console.log(err);
+        
       return res.status(401).json({
         message: 'Erro no Login'
       });

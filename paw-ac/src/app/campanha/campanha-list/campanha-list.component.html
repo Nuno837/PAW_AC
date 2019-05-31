@@ -3,14 +3,25 @@
   <mat-expansion-panel *ngFor="let campanha of campanhas">
     <mat-expansion-panel-header>
       <h4>{{campanha.title}}</h4>
+
     </mat-expansion-panel-header>
 
     <section>
-        <p> <b>Descrição:</b> {{ campanha.description }} </p>
-        <p> <b>IBAN:</b> {{campanha.iban}} </p>
-        <p> <b>Objetivo:</b> {{campanha.goal}} </p>
-  
+      <p> <b>Descrição:</b> {{ campanha.description }} </p>
+      <p> <b>IBAN:</b> {{campanha.iban}} </p>
+      <p> <b>Objetivo:</b> {{campanha.goal}} </p>
     </section>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Utilizadores que doaram</b>
+        </mat-panel-title>
+
+
+      </mat-expansion-panel-header>
+
+    </mat-expansion-panel>
     <mat-action-row>
       <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
       <button mat-button color="warn">Editar Campanha</button>

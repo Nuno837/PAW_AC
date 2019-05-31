@@ -9,11 +9,11 @@ import { DonationsService } from 'src/app/services/donations.service';
 })
 
 export class DonationsCreateComponent {
-    enteredContent = '';
-    enteredTitle = '';
-    numDon=[];
+
+
     public criarDonations: FormGroup;
-    @Output() donationsCreated = new EventEmitter();
+
+    donations: any[];
 
 
     constructor(
@@ -22,11 +22,19 @@ export class DonationsCreateComponent {
     ) {
         this.criarDonations = this.formBuilder.group({
             user: ['', [Validators.required]],
-            description: ['', [Validators.required]],
-            numDon: ['', [Validators.required]]
+            valor: ['', [Validators.required]],
 
-        
+
         });
+    }
+    onAddDonation() {
+        this.donationsService.addDonation(
+            this.criarDonations.value.user,
+            this.criarDonations.value.valor
+        );
+        console.log(this.criarDonations);
+
+        this.criarDonations.reset();
     }
 
 }

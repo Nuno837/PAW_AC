@@ -1,7 +1,10 @@
 mat-form-field, textarea {
-  width: 50%;
+  width: 100%;
 }
 
+.controlvalue{
+  width:25%;
+}
 .donation-margin {
   margin: 0%;
   width: 50%;
