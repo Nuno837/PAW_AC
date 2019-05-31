@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './authentication/authentication-Int';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-create.component';
@@ -43,9 +42,7 @@ import { AuthenticationInterceptor } from './authentication/authentication-Int';
     AngularMaterialModule,
     HttpClientModule
   ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

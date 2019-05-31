@@ -64,34 +64,3 @@ exports.getCampanha = (req, res, next) => {
     });
   });
 };
-
-exports.updateCampanha = (req, res, next) => {
-  const campanha = new Campanha({
-    title: req.body.title,
-    image: req.body.image,
-    description: req.body.description,
-    iban: req.body.iban,
-    goal: req.body.goal
-  });
-  Campanha.updateOne({_id: req.params.id}, campanha)
-  .then(result => {
-    res.status.json({message: "Update com sucesso"});
-  });
-};
-
-exports.deleteCampanha = (req, res, next) => {
-  Campanha.deleteOne({_id: req.params.id}).then(result => {
-    if (result.n > 0) {
-      res.status(200).json({
-        message: 'Campanha Eliminada com Sucesso'});
-    } else {
-      res.status(401).json({
-        message: 'Utilizador Não Autorizado a Eliminar a Campanha'});
-    }
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: 'Erro ao Tentar Eliminar Campanha'
-    });
-  });
-};
