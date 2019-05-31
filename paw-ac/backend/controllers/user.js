@@ -17,7 +17,7 @@ exports.createUser = (req, res, next) => {
       latlng: req.body.latlng,
       iban: req.body.iban,
       nif: req.body.nif
-   
+
     });
     console.log(user);
     user.save()
@@ -66,6 +66,7 @@ exports.userLogin = (req, res, next) => {
         expiresIn: 3600,
         userid: fetchedUser._id
       });
+      console.log(token);
     })
     .catch(err => {
         console.log(err);

@@ -20,4 +20,4 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
         ReactiveFormsModule
     ]
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {}
