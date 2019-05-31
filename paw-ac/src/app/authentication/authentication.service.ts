@@ -20,8 +20,6 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient, private router: Router) { }
 
-  
-
     createUser(
         nome: string,
         username: string,
@@ -41,7 +39,8 @@ export class AuthenticationService {
             latlng,
             iban,
             nif
-        }; this.http
+        };
+        this.http
             .post(USER_URL + 'signup', authenticationData)
             .subscribe(response => {
                 this.router.navigate(['/login']);
@@ -54,18 +53,18 @@ export class AuthenticationService {
     getToken() {
         return this.token;
       }
-    
+
       getIsAuthenticated() {
         if (!this.isAuthenticated) {
             this.router.navigate(['/login']);
         }
         return this.isAuthenticated;
       }
-    
+
       getUserId() {
         return this.userid;
       }
-    
+
       getAuthenticationStatus() {
         return this.authenticationStatus.asObservable();
       }
@@ -73,7 +72,7 @@ export class AuthenticationService {
       getIfisAdmin() {
         return this.admin;
       }
-    
+
       login(username: string, password: string) {
         const loginData = {
           username,
@@ -110,7 +109,7 @@ export class AuthenticationService {
             this.router.navigate(['/login']);
           });
         }
-    
+
       autoAuthenticationUser() {
         const authInformation = this.getAuthenticationData();
         if (!authInformation) {
@@ -133,7 +132,7 @@ export class AuthenticationService {
           this.router.navigate(['/login']);
         }
       }
-    
+
       logout() {
         this.token = null;
         this.isAuthenticated = false;
@@ -144,26 +143,26 @@ export class AuthenticationService {
         this.admin = false;
         this.router.navigate(['/login']);
       }
-    
+
       private setAuthenticationTimer(expirationTimer: number) {
         console.log('Setting timer: ' + expirationTimer);
         this.tokenTimer = setTimeout(() => {
           this.logout();
         }, expirationTimer * 1000);
       }
-    
+
       private saveAuthenticationData(token: string, expirationDate: Date, userId: string) {
         localStorage.setItem('token', token);
         localStorage.setItem('expiration', expirationDate.toISOString());
         localStorage.setItem('userid', userId);
       }
-    
+
       private clearAuthenticationData() {
         localStorage.removeItem('token');
         localStorage.removeItem('expiration');
         localStorage.removeItem('userid');
       }
-    
+
       private getAuthenticationData() {
         const token = localStorage.getItem('token');
         const expirationDate = localStorage.getItem('expiration');
@@ -178,5 +177,5 @@ export class AuthenticationService {
           userid,
         };
       }
-    
+
 }

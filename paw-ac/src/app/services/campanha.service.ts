@@ -46,16 +46,20 @@ export class CampanhaService {
       });
   }
 
-  getPostUpdateListener() {
+  getCampanhaUpdateListener() {
     return this.campanhasUpdated.asObservable();
+  }
+
+  getCampanha ( id: string) {
+    return {...this.campanhas.find(p => p.id === id)};
   }
 
   addCampanha(
     title: string,
     image: string,
     description: string,
-    iban:string,
-    goal:number
+    iban: string,
+    goal: number
   ) {
     const campanha: Campanha = {
       id: null,
@@ -70,5 +74,30 @@ export class CampanhaService {
     .subscribe(responseData => {
         this.router.navigate(['/']);
     });
+  }
+
+  updateCampanha (
+    id: string,
+    title: string,
+    image: string,
+    description: string,
+    iban: string,
+    goal: number
+  ) {
+    const campanha: Campanha = {
+      id: id,
+      title: title,
+      image: image,
+      description: description,
+      iban: iban,
+      goal: goal
+    };
+    console.log(campanha);
+    this.http.put(BACKEND_URL + id, campanha)
+    .subscribe(response => console.log(response));
+  }
+
+  deleteCampanha(campanhaId: string) {
+    return this.http.delete(BACKEND_URL + campanhaId);
   }
 }

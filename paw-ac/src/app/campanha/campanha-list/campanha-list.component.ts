@@ -25,7 +25,7 @@ export class CampanhaListComponent implements OnInit{
    ngOnInit() {
     this.campanhaService.getCampanhas(this.campanhaPerPage, this.currentPage);
     this.campanhaSub = this.campanhaService
-      .getPostUpdateListener()
+      .getCampanhaUpdateListener()
       .subscribe(
         (campanhaData: { campanhas: Campanha[]; campanhaCount: number }) => {
           this.totalCampanhas = campanhaData.campanhaCount;
@@ -34,4 +34,12 @@ export class CampanhaListComponent implements OnInit{
       );
 
   }
+
+  onDelete(campanhaId: string) {
+    this.campanhaService.deleteCampanha(campanhaId).subscribe(() => {
+      this.campanhaService.getCampanhas(this.campanhaPerPage, this.currentPage);
+    }, () => {
+    });
+  }
+
 }

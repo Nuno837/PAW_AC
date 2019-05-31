@@ -17,7 +17,7 @@ exports.createUser = (req, res, next) => {
       latlng: req.body.latlng,
       iban: req.body.iban,
       nif: req.body.nif
-   
+
     });
     console.log(user);
     user.save()
@@ -56,7 +56,7 @@ exports.userLogin = (req, res, next) => {
       }
       const token = jwt.sign(
         {username: fetchedUser.username, userid: fetchedUser._id},
-        process.env.JWT_KEY,
+        'process.env.JWT_KEY',
         {expiresIn: '1h'}
       );
       res.status(200).json({
@@ -64,6 +64,7 @@ exports.userLogin = (req, res, next) => {
         expiresIn: 3600,
         userid: fetchedUser._id
       });
+      console.log(token);
     })
     .catch(err => {
       return res.status(401).json({

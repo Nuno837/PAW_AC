@@ -9,11 +9,12 @@
         <p> <b>Descrição:</b> {{ campanha.description }} </p>
         <p> <b>IBAN:</b> {{campanha.iban}} </p>
         <p> <b>Objetivo:</b> {{campanha.goal}} </p>
-  
+
     </section>
     <mat-action-row>
       <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
-      <button mat-button color="warn">Editar Campanha</button>
+      <button mat-button color="warn" [routerLink]="['/edit', campanha.id]" routerLinkActive="router-link-active" >Editar Campanha</button>
+      <button mat-button color="warn" (click)="onDelete(campanha.id)">DELETE</button>
       <!--Só pode alterar a campanha quem a criou , verificar o user-->
     </mat-action-row>
   </mat-expansion-panel>
