@@ -39,7 +39,7 @@ export class CampanhaListComponent implements OnInit {
           this.totalCampanhas = campanhaData.campanhaCount;
           this.campanhas = campanhaData.campanhas;
         }
-      ); 
+      );
 
   }
   verifyAuthentication() {
@@ -54,5 +54,12 @@ export class CampanhaListComponent implements OnInit {
         }
       });
 
+  }
+
+  onDelete(campanhaId: string){
+    this.campanhaService.deleteCampanha(campanhaId).subscribe(() => {
+      this.campanhaService.getCampanhas(this.campanhaPerPage, this.currentPage);
+    }, () => {
+    });
   }
 }

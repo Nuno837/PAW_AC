@@ -95,4 +95,8 @@ export class CampanhaService {
         this.router.navigate(['/']);
     });
   }
+
+  deleteCampanha(campanhaId: string){
+    return this.http.delete(BACKEND_URL + campanhaId);
+  }
 }

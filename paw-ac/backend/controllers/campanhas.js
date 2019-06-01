@@ -80,3 +80,10 @@ exports.editCampanha = (req, res, next) => {
     res.status(200).json({message: 'Update com sucesso'});
   });
 };
+
+exports.deleteCampanha = (req, res, next) => {
+  Campanha.deleteOne({_id: req.params.id})
+  .then(result => {
+    console.log(result);
+  })
+};
