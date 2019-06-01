@@ -50,6 +50,30 @@ export class CampanhaService {
     return this.campanhasUpdated.asObservable();
   }
 
+  getCampanha(id: string) {
+    return{...this.campanhas.find(c => c.id === id)};
+  }
+
+  updateCampanha(
+    id: string,
+    title: string,
+    image: string,
+    description: string,
+    iban:string,
+    goal:number
+  ) {
+    const campanha: Campanha = {
+      id: id,
+      title: title,
+      image: image,
+      description: description,
+      iban: iban,
+      goal: goal
+    };
+    this.http.put(BACKEND_URL + id, campanha)
+    .subscribe(response => console.log(response));
+  }
+
   addCampanha(
     title: string,
     image: string,

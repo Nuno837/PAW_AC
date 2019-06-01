@@ -10,11 +10,12 @@ import { SignupCreateComponent } from './authentication/signup/signup.component'
 const routes: Routes = [
   {path: '', component: CampanhaListComponent},
   {path: 'create-campanha', component: CampanhaCreateComponent},
+  {path: 'edit/:id', component: CampanhaCreateComponent},
   {path: 'list-campanha', component: CampanhaListComponent},
   {path: 'create-don', component: DonationsCreateComponent},
   {path: 'login', component:LoginComponent},
   {path: 'signup', component:SignupCreateComponent}
-  
+
 ];
 
 @NgModule({

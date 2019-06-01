@@ -27,7 +27,7 @@
     </mat-expansion-panel>
     <mat-action-row>
       <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
-      <button mat-button color="warn">Editar Campanha</button>
+      <a mat-button color="warn" [routerLink]="['/edit', campanha.id]">Editar Campanha</a>
       <!--Só pode alterar a campanha quem a criou , verificar o user-->
     </mat-action-row>
   </mat-expansion-panel>

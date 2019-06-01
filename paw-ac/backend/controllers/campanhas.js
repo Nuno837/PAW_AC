@@ -64,3 +64,19 @@ exports.getCampanha = (req, res, next) => {
     });
   });
 };
+
+exports.editCampanha = (req, res, next) => {
+  const campanha = new Campanha({
+    _id: req.body.id,
+    title: req.body.title,
+    image: req.body.image,
+    description: req.body.description,
+    iban: req.body.iban,
+    goal: req.body.goal
+  });
+  Campanha.updateOne({_id: req.params.id}, campanha)
+  .then(result => {
+    console.log(result);
+    res.status(200).json({message: 'Update com sucesso'});
+  });
+};

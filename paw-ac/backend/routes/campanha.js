@@ -10,6 +10,8 @@ router.get('', CampanhaController.getCampanhas);
 
 router.get('/:id', CampanhaController.getCampanha);
 
+router.put('/:id', CampanhaController.editCampanha);
+
 //router.delete('/:id', CampanhaController.deleteCampanha);
 
 module.exports = router;
