@@ -46,7 +46,7 @@ export class CampanhaService {
       });
   }
 
-  getPostUpdateListener() {
+  getCampanhaUpdateListener() {
     return this.campanhasUpdated.asObservable();
   }
 

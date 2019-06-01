@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     endereco: { type: String, required: true },
     latlng: { type: String, required: true },
-    iban: { type: Number, required: true },
+    iban: { type: String, required: true },
     nif: { type: Number, required: true, unique: true }
 
 

@@ -28,7 +28,7 @@ export class AuthenticationService {
     password: string,
     endereco: string,
     latlng: string,
-    iban: number,
+    iban: string,
     nif: number
 
 
@@ -96,7 +96,7 @@ export class AuthenticationService {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresDuration * 1000);
           this.saveAuthenticationData(token, expirationDate, this.userid);
-          if (this.userid === '5cdad7e4fde4eb2dc0eb71ef') {
+          if (this.userid === '5cf2b1f152da4029748e3d4f') {
             this.admin = true;
             this.router.navigate(['/admin']);
           } else {
@@ -124,7 +124,7 @@ export class AuthenticationService {
       this.isAuthenticated = true;
       this.userid = authInformation.userid;
       this.setAuthenticationTimer(expiresIn / 1000);
-      if (this.userid === '5cdad7e4fde4eb2dc0eb71ef') {
+      if (this.userid === '5cf2b1f152da4029748e3d4f') {
         this.admin = true;
         this.authenticationStatus.next(true);
       }
