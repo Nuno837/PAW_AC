@@ -1,7 +1,7 @@
 <h2>Crie uma Doação</h2>
 <mat-card>
     <form [formGroup]="criarDonations" (ngSubmit)="onAddDonation()">
-        <mat-form-field>
+        <mat-form-field >
             <h4><i class="material-icons">
                     dashboard
                 </i> Nome do Utilizador</h4>
@@ -19,17 +19,9 @@
         </mat-form-field>
         <i class="material-icons">euro_symbol</i>
 
-<<<<<<< HEAD
-        <h4><button mat-stroked-button color="warn" type="submit">
+        <h4><button mat-stroked-button color="warn"  *ngIf="isAuthenticated" type="submit">
                 Criar Doação
             </button>
         </h4>
     </form>
 </mat-card>
-=======
-    <h4><button mat-stroked-button  color="warn" type="submit">
-            Criar Doação
-        </button>
-    </h4>
-</mat-card>
->>>>>>> parent of 133ac0f... editar campanha

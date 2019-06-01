@@ -4,6 +4,6 @@ export interface AuthenticationData {
   password: string;
   endereco: string;
   latlng: string;
-  iban: number;
+  iban: string;
   nif: number;
 }

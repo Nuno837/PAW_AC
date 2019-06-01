@@ -11,9 +11,9 @@ const BACKEND_URL = environment.apiUrl + '/donations/';
 export class DonationsService {
   private donations: Donation[] = [];
 
-  private donationUpdate = new Subject<{donations: Donation[], donationCount: number}>();
+  private donationUpdate = new Subject<{ donations: Donation[], donationCount: number }>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getDonations(donationsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${donationsPerPage}&page=${currentPage}`;
@@ -23,19 +23,19 @@ export class DonationsService {
       )
       .pipe(
         map((donationsData) => {
-        return {
-          donations: donationsData.donations.map(donation => {
-            return {
-              id: donation._id,
-              user: donation.user,
-              valor: donation.valor,
-              estado: donation.estado
-            };
-          }),
-          maxDonations: donationsData.maxDonations
-        };
-      })
-    )
+          return {
+            donations: donationsData.donations.map(donation => {
+              return {
+                id: donation._id,
+                user: donation.user,
+                valor: donation.valor,
+                estado: donation.estado,
+              };
+            }),
+            maxDonations: donationsData.maxDonations
+          };
+        })
+      )
       .subscribe(transformedDonationsData => {
         this.donations = transformedDonationsData.donations;
         this.donationUpdate.next({
@@ -44,6 +44,7 @@ export class DonationsService {
         });
       });
   }
+
 
   getPostUpdateListener() {
     return this.donationUpdate.asObservable();
