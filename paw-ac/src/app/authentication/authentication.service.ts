@@ -98,7 +98,7 @@ export class AuthenticationService {
           this.saveAuthenticationData(token, expirationDate, this.userid);
           if (this.userid === '5cf2b1f152da4029748e3d4f') {
             this.admin = true;
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/']); //como é admin por enquanto vai para aqui
           } else {
             this.router.navigate(['/']);
           }
