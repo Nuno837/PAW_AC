@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 
 const USER_URL = environment.apiUrl + '/user/';
@@ -16,6 +18,9 @@ export class AuthenticationService {
   private userid: string;
   admin = false;
   private tokenTimer: any;
+
+  private users: User[] = [];
+  private usersUpdated = new Subject<{users: User[], userCount: number}>();
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -72,6 +77,10 @@ export class AuthenticationService {
 
   getIfisAdmin() {
     return this.admin;
+  }
+
+  getUsersUpdated() {
+    return this.usersUpdated.asObservable();
   }
 
   login(username: string, password: string) {
@@ -134,6 +143,39 @@ export class AuthenticationService {
     }
   }
 
+  getUsers(userPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${userPerPage}&page=${currentPage}`;
+    this.http
+      .get<{ message: string; users: any; maxUsers: number }>(
+        USER_URL + 'listar/' + queryParams
+      )
+      .pipe(
+        map((usersData) => {
+        return {
+          users: usersData.users.map(user => {
+            return {
+              id: user._id,
+              nome: user.nome,
+              username: user.username,
+              endereco: user.endereco,
+              latlng: user.latlng,
+              iban: user.iban,
+              nif: user.nif
+            };
+          }),
+          maxUsers: usersData.maxUsers
+        };
+      })
+    )
+      .subscribe(transformedUsersData => {
+        this.users = transformedUsersData.users;
+        this.usersUpdated.next({
+          users: [...this.users],
+          userCount: transformedUsersData.maxUsers
+        });
+      });
+  }
+
   logout() {
     this.token = null;
     this.isAuthenticated = false;
@@ -177,6 +219,10 @@ export class AuthenticationService {
       expirationDate: new Date(expirationDate),
       userid,
     };
+  }
+
+  deleteUser(userId: string) {
+    return this.http.delete(USER_URL + 'listar/' + userId);
   }
 
 }

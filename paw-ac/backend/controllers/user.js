@@ -17,7 +17,7 @@ exports.createUser = (req, res, next) => {
       latlng: req.body.latlng,
       iban: req.body.iban,
       nif: req.body.nif
-   
+
     });
     console.log(user);
     user.save()
@@ -55,7 +55,7 @@ exports.userLogin = (req, res, next) => {
         });
       }
       console.log(fetchedUser);
-      
+
       const token = jwt.sign(
         {username: fetchedUser.username, userid: fetchedUser._id},
         'process.env.JWT_KEY',
@@ -69,9 +69,57 @@ exports.userLogin = (req, res, next) => {
     })
     .catch(err => {
         console.log(err);
-        
+
       return res.status(401).json({
         message: 'Erro no Login'
       });
     })
+};
+
+exports.getUsers = (req, res, next) => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = req.query.page;
+  const userQuery = User.find({id: req.body.id});
+  let usersAdq;
+  if(pageSize && currentPage){
+    userQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+    userQuery
+    .then(documents => {
+      usersAdq = documents;
+      return User.countDocuments();
+    })
+    .then(count => {
+      res.status(200).json({
+        message: 'Users Obtidos com Sucesso',
+        users: usersAdq,
+        maxUsers: count
+    });
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: 'Erro ao Tentar Obter Users'
+    });
+  });
+};
+
+exports.deleteUser = (req, res, next) => {
+  console.log(req.body.id);
+
+  User.deleteOne({id: req.body.id}).then(result => {
+    if (result.n > 0) {
+      res.status(200).json({
+        message: 'Utilizador Eliminada com Sucesso'});
+    } else {
+      res.status(401).json({
+        message: 'Utilizador Não Autorizado a Eliminar a User'});
+    }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: 'Erro ao Tentar Eliminar o Utilizador'
+    });
+  });
 };
