@@ -19,7 +19,9 @@
       </mat-expansion-panel-header>
 
       <mat-expansion-panel *ngFor="let donation of donations ">
-        <mat-expansion-panel-header><h4>{{donation.user}}</h4></mat-expansion-panel-header>
+        <mat-expansion-panel-header>
+          <h4>{{donation.user}}</h4>
+        </mat-expansion-panel-header>
 
         <section>
           <p><b>Valor:{{donation.valor}}€</b></p>
@@ -30,9 +32,10 @@
     <mat-card class="info-text mat-body-1" *ngIf="donations.length <= 0">Sem Donations Efetuadas</mat-card>
 
     <mat-action-row>
-      <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
-      <a mat-button color="warn" [routerLink]="['/edit', campanha.id]">Editar Campanha</a>
-      <button mat-button color="warn" (click)="onDelete(campanha.id)">Eliminar Campanha</button>
+      <button mat-button color="warn" routerLink="/create-don" *ngIf="isAuthenticated">Fazer Doação</button>
+      <button mat-button color="warn" [routerLink]="['/edit', campanha.id]" *ngIf="admin">Editar Campanha</button>
+      <button mat-button color="warn" (click)="onDelete(campanha.id)" *ngIf="admin ">Eliminar
+        Campanha</button>
       <!--Só pode alterar a campanha quem a criou , verificar o user-->
     </mat-action-row>
   </mat-expansion-panel>

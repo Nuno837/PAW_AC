@@ -17,22 +17,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
 
-  ngOnDestroy() {
-    this.authenticationSubs.unsubscribe();
-    this.admin = false;
-  
-  }
 
   ngOnInit() {
+
     this.admin = false;
+
     this.isAuthenticated = this.authenticationService.getIsAuthenticated();
+
+
+
     this.authenticationSubs = this.authenticationService.getAuthenticationStatus()
       .subscribe(isAuthenticated => {
         this.isAuthenticated = isAuthenticated;
-        if (this.authenticationService.getIfisAdmin()) {
-          this.admin = true;
-        }
+
       });
+  }
+
+  ifisAdmin() {
+    if (this.authenticationService.getIfisAdmin()) {
+      this.admin = true;
+      return this.admin;
+    }
+  }
+  ngOnDestroy() {
+    this.authenticationSubs.unsubscribe();
+    this.admin = false;
+
   }
 
   Logout() {

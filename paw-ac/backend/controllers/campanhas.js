@@ -1,5 +1,7 @@
 const Campanha = require('../models/campanha');
 
+
+
 exports.criarCampanha = (req, res, next) => {
   const campanha = new Campanha({
     title: req.body.title,
@@ -14,12 +16,12 @@ exports.criarCampanha = (req, res, next) => {
       campanhaId: createdCampanha._id
     });
   })
-  .catch(error => {
-    console.log(error);
-    res.status(500).json({
-      message: 'Erro ao criar campanha'
-    })
-  });
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({
+        message: 'Erro ao criar campanha'
+      })
+    });
 };
 
 exports.getCampanhas = (req, res, next) => {
@@ -27,12 +29,12 @@ exports.getCampanhas = (req, res, next) => {
   const currentPage = req.query.page;
   campanhaQuery = Campanha.find();
   let campanhasAdq;
-  if(pageSize && currentPage){
+  if (pageSize && currentPage) {
     campanhaQuery
       .skip(pageSize * (currentPage - 1))
       .limit(pageSize);
   }
-    campanhaQuery
+  campanhaQuery
     .then(documents => {
       campanhasAdq = documents;
       return Campanha.countDocuments();
@@ -42,21 +44,21 @@ exports.getCampanhas = (req, res, next) => {
         message: 'campanhas Obtidas com Sucesso',
         campanhas: campanhasAdq,
         maxcampanhas: count
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: 'Erro ao Tentar Obter campanhas'
+      });
     });
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: 'Erro ao Tentar Obter campanhas'
-    });
-  });
 };
 
 exports.getCampanha = (req, res, next) => {
   Campanha.findById(req.params.id).then(campanha => {
-    if(campanha) {
+    if (campanha) {
       res.status(200).json(campanha);
     } else {
-      res.status(404).json({message: 'Campanha Não Existe'});
+      res.status(404).json({ message: 'Campanha Não Existe' });
     }
   }).catch(error => {
     res.status(500).json({
@@ -74,16 +76,16 @@ exports.editCampanha = (req, res, next) => {
     iban: req.body.iban,
     goal: req.body.goal
   });
-  Campanha.updateOne({_id: req.params.id}, campanha)
-  .then(result => {
-    console.log(result);
-    res.status(200).json({message: 'Update com sucesso'});
-  });
+  Campanha.updateOne({ _id: req.params.id }, campanha)
+    .then(result => {
+      console.log(result);
+      res.status(200).json({ message: 'Update com sucesso' });
+    });
 };
 
 exports.deleteCampanha = (req, res, next) => {
-  Campanha.deleteOne({_id: req.params.id})
-  .then(result => {
-    console.log(result);
-  })
+  Campanha.deleteOne({ _id: req.params.id })
+    .then(result => {
+      console.log(result);
+    })
 };

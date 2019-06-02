@@ -37,6 +37,16 @@ export class CampanhaListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.admin = false;
+    this.isAuthenticated = this.authenticationService.getIsAuthenticated();
+    if (this.authenticationService.getIfisAdmin()) {
+      this.admin = true;
+    }
+    this.authenticationSubs = this.authenticationService.getAuthenticationStatus()
+      .subscribe(isAuthenticated => {
+        this.isAuthenticated = isAuthenticated;
+
+      });
 
     this.campanhaService.getCampanhas(this.campanhaPerPage, this.currentPage);
     this.campanhaSub = this.campanhaService
@@ -58,22 +68,11 @@ export class CampanhaListComponent implements OnInit {
         }
       )
 
-  }
-  verifyAuthentication() {
-    this.admin = false;
-    this.isAuthenticated = this.authenticationService.getIsAuthenticated();
-
-    this.authenticationSubs = this.authenticationService.getAuthenticationStatus()
-      .subscribe(isAuthenticated => {
-        this.isAuthenticated = isAuthenticated;
-        if (this.authenticationService.getIfisAdmin()) {
-          this.admin = true;
-        }
-      });
 
   }
 
-  onDelete(campanhaId: string){
+
+  onDelete(campanhaId: string) {
     this.campanhaService.deleteCampanha(campanhaId).subscribe(() => {
       this.campanhaService.getCampanhas(this.campanhaPerPage, this.currentPage);
     }, () => {

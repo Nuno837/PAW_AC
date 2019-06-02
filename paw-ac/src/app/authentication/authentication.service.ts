@@ -96,7 +96,7 @@ export class AuthenticationService {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresDuration * 1000);
           this.saveAuthenticationData(token, expirationDate, this.userid);
-          if (this.userid === '5cf2b1f152da4029748e3d4f') {
+          if (this.userid === '5cf3eb8f5a325f087402a274') {
             this.admin = true;
             this.router.navigate(['/']); //como é admin por enquanto vai para aqui
           } else {
@@ -124,7 +124,7 @@ export class AuthenticationService {
       this.isAuthenticated = true;
       this.userid = authInformation.userid;
       this.setAuthenticationTimer(expiresIn / 1000);
-      if (this.userid === '5cf2b1f152da4029748e3d4f') {
+      if (this.userid === '5cf3eb8f5a325f087402a274') {
         this.admin = true;
         this.authenticationStatus.next(true);
       }

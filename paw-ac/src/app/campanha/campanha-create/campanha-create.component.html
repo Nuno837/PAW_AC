@@ -6,7 +6,7 @@
           dashboard
         </i> Nome da Campanha</h4>
       <input matInput type="text" formControlName="title">
-      <mat-error *ngIf="criarCampanha.get('title').invalid">Insira um titulo</mat-error>
+      <mat-error *ngIf="criarCampanha.get('title').invalid">Insira um titulo válido</mat-error>
     </mat-form-field>
     <div>
       <button mat-stroked-button type="button"  color="warn" (click)="filePicker.click()">Escolha o Logo</button>

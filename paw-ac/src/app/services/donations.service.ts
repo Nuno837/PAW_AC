@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Estado } from '../Enums/estado';
 
 const BACKEND_URL = environment.apiUrl + '/donations/';
 @Injectable({ providedIn: 'root' })
@@ -30,6 +31,7 @@ export class DonationsService {
                 user: donation.user,
                 valor: donation.valor,
                 estado: donation.estado,
+                //creator: donation.creator
               };
             }),
             maxDonations: donationsData.maxDonations
@@ -45,6 +47,15 @@ export class DonationsService {
       });
   }
 
+  getDonation(id: string) {
+    return this.http.get<{
+      _id: string;
+      user: string;
+      valor: number;
+      estado: Estado;
+    }>(BACKEND_URL + id);
+  }
+
 
   getPostUpdateListener() {
     return this.donationUpdate.asObservable();
@@ -53,13 +64,16 @@ export class DonationsService {
   addDonation(
     user: string,
     valor: number,
-    estado = "PROCESSAMENTO"
+    estado: Estado
   ) {
     const donation: Donation = {
       id: null,
       user,
       valor,
-      estado
+      estado,
+     // creator : null
+     
+
     };
     console.log(donation);
     this.http.post<{ message: string, donationId: string }>(BACKEND_URL, donation
