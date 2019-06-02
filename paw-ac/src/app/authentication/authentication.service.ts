@@ -56,6 +56,38 @@ export class AuthenticationService {
       });
   }
 
+  getUsers() {
+    this.http
+      .get<{ message: string; users: any; maxUsers: number }>(
+        USER_URL + 'listar/'
+      )
+      .pipe(
+        map((usersData) => {
+        return {
+          users: usersData.users.map(user => {
+            return {
+              id: user._id,
+              nome: user.nome,
+              username: user.username,
+              endereco: user.endereco,
+              latlng: user.latlng,
+              iban: user.iban,
+              nif: user.nif
+            };
+          }),
+          maxUsers: usersData.maxUsers
+        };
+      })
+    )
+      .subscribe(transformedUsersData => {
+        this.users = transformedUsersData.users;
+        this.usersUpdated.next({
+          users: [...this.users],
+          userCount: transformedUsersData.maxUsers
+        });
+      });
+  }
+
   getToken() {
     return this.token;
   }
@@ -105,9 +137,9 @@ export class AuthenticationService {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresDuration * 1000);
           this.saveAuthenticationData(token, expirationDate, this.userid);
-          if (this.userid === '5cf3eb8f5a325f087402a274') {
+          if (this.userid === '5cf4538ff10b634b40b766ce') {
             this.admin = true;
-            this.router.navigate(['/']); //como é admin por enquanto vai para aqui
+            this.router.navigate(['/']);
           } else {
             this.router.navigate(['/']);
           }
@@ -133,7 +165,7 @@ export class AuthenticationService {
       this.isAuthenticated = true;
       this.userid = authInformation.userid;
       this.setAuthenticationTimer(expiresIn / 1000);
-      if (this.userid === '5cf3eb8f5a325f087402a274') {
+      if (this.userid === '5cf4538ff10b634b40b766ce') {
         this.admin = true;
         this.authenticationStatus.next(true);
       }
@@ -141,39 +173,6 @@ export class AuthenticationService {
     } else {
       this.router.navigate(['/login']);
     }
-  }
-
-  getUsers(userPerPage: number, currentPage: number) {
-    const queryParams = `?pagesize=${userPerPage}&page=${currentPage}`;
-    this.http
-      .get<{ message: string; users: any; maxUsers: number }>(
-        USER_URL + 'listar/' + queryParams
-      )
-      .pipe(
-        map((usersData) => {
-        return {
-          users: usersData.users.map(user => {
-            return {
-              id: user._id,
-              nome: user.nome,
-              username: user.username,
-              endereco: user.endereco,
-              latlng: user.latlng,
-              iban: user.iban,
-              nif: user.nif
-            };
-          }),
-          maxUsers: usersData.maxUsers
-        };
-      })
-    )
-      .subscribe(transformedUsersData => {
-        this.users = transformedUsersData.users;
-        this.usersUpdated.next({
-          users: [...this.users],
-          userCount: transformedUsersData.maxUsers
-        });
-      });
   }
 
   logout() {

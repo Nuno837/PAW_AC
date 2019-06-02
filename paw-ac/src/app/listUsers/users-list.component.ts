@@ -12,14 +12,11 @@ import { AuthenticationService } from '../authentication/authentication.service'
   styleUrls: ['./users-list.component.css']
 })
 
-export class ListagemUsersComponent implements OnInit, OnDestroy {
+export class UserListComponent implements OnInit, OnDestroy {
   users: User[] = [];
   private userSub: Subscription;
   isLoading = false;
   totalUsers = 0;
-  usersPerPage = 5;
-  currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
   private authStatusSub: Subscription;
   userIsAuthenticated = false;
   userId: string;
@@ -27,13 +24,12 @@ export class ListagemUsersComponent implements OnInit, OnDestroy {
 
   constructor(
   private authenticationService: AuthenticationService,
-  private campanhaService: CampanhaService,
   private router: Router) { }
 
   ngOnInit() {
 
     this.isLoading = true;
-    this.authenticationService.getUsers(this.usersPerPage, this.currentPage);
+    this.authenticationService.getUsers();
     this.userId = this.authenticationService.getUserId();
     this.userSub = this.authenticationService.getUsersUpdated()
       .subscribe(
@@ -53,17 +49,14 @@ export class ListagemUsersComponent implements OnInit, OnDestroy {
   }
 
   onChangedPage(pageData: PageEvent) {
-    this.isLoading = true;
-    this.currentPage = pageData.pageIndex + 1;
-    this.usersPerPage = pageData.pageSize;
-    this.authenticationService.getUsers(this.usersPerPage, this.currentPage);
+    this.authenticationService.getUsers();
 
   }
 
   onDelete(userId: string) {
     this.isLoading = true;
     this.authenticationService.deleteUser(userId).subscribe(() => {
-      this.authenticationService.getUsers(this.usersPerPage, this.currentPage);
+      this.authenticationService.getUsers();
     }, () => {
       this.isLoading = false;
     });

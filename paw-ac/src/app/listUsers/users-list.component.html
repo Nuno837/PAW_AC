@@ -22,6 +22,4 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<h2 class="info-text mat-body-3" *ngIf="(!(users.length > 0)"> Sem Utilizadores! </h2>
-<mat-paginator [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" ></mat-paginator>
-
+<h2 class="info-text mat-body-3" *ngIf="(!(users.length > 0))"> Sem Utilizadores! </h2>

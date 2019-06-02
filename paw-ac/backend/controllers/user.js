@@ -77,15 +77,8 @@ exports.userLogin = (req, res, next) => {
 };
 
 exports.getUsers = (req, res, next) => {
-  const pageSize = +req.query.pagesize;
-  const currentPage = req.query.page;
   const userQuery = User.find({id: req.body.id});
   let usersAdq;
-  if(pageSize && currentPage){
-    userQuery
-      .skip(pageSize * (currentPage - 1))
-      .limit(pageSize);
-  }
     userQuery
     .then(documents => {
       usersAdq = documents;

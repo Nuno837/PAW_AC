@@ -5,6 +5,7 @@ import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-cre
 import { DonationsCreateComponent } from './donations/donations-create.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignupCreateComponent } from './authentication/signup/signup.component';
+import { UserListComponent } from './listUsers/users-list.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'list-campanha', component: CampanhaListComponent},
   {path: 'create-don', component: DonationsCreateComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'signup', component:SignupCreateComponent}
+  {path: 'signup', component:SignupCreateComponent},
+  {path: 'listar', component:UserListComponent}
 
 ];
 

@@ -1,5 +1,5 @@
 export enum Estado {
-    PROCESSAMENTO='em processamento',
+    PROCESSAMENTO= 'em processamento',
     PROCESSADA= 'processada',
     CANCELADA = 'cancelada'
 }

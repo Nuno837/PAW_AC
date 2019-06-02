@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { CampanhaCreateComponent } from './campanha/campanha-create/campanha-create.component';
 import { HeaderComponent } from './header/header.component';
 import { CampanhaListComponent } from './campanha/campanha-list/campanha-list.component';
+import { UserListComponent } from './listUsers/users-list.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { DonationsCreateComponent } from './donations/donations-create.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { SignupCreateComponent } from './authentication/signup/signup.component';
 import { AuthenticationInterceptor } from './authentication/authentication-Int';
+import { from } from 'rxjs';
 
 
 
@@ -26,7 +28,8 @@ import { AuthenticationInterceptor } from './authentication/authentication-Int';
     DonationsCreateComponent,
     LoginComponent,
     SignupCreateComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
