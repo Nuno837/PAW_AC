@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/campanhas/';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CampanhaService {
   private campanhas: Campanha[] = [];
-  private campanhasUpdated = new Subject<{campanhas: Campanha[], campanhaCount: number}>();
+  private campanhasUpdated = new Subject<{ campanhas: Campanha[], campanhaCount: number }>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getCampanhas(campanhaPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${campanhaPerPage}&page=${currentPage}`;
@@ -23,20 +23,21 @@ export class CampanhaService {
       )
       .pipe(
         map((campanhasData) => {
-        return {
-          campanhas: campanhasData.campanhas.map(campanha => {
-            return {
-              id: campanha._id,
-              title: campanha.title,
-              description: campanha.description,
-              iban: campanha.iban,
-              goal: campanha.goal
-            };
-          }),
-          maxCampanhas: campanhasData.maxCampanhas
-        };
-      })
-    )
+          return {
+            campanhas: campanhasData.campanhas.map(campanha => {
+              return {
+                id: campanha._id,
+                title: campanha.title,
+                description: campanha.description,
+                iban: campanha.iban,
+                goal: campanha.goal,
+                //creator: campanha.creator
+              };
+            }),
+            maxCampanhas: campanhasData.maxCampanhas
+          };
+        })
+      )
       .subscribe(transformedCampanhasData => {
         this.campanhas = transformedCampanhasData.campanhas;
         this.campanhasUpdated.next({
@@ -51,7 +52,7 @@ export class CampanhaService {
   }
 
   getCampanha(id: string) {
-    return{...this.campanhas.find(c => c.id === id)};
+    return { ...this.campanhas.find(c => c.id === id) };
   }
 
   updateCampanha(
@@ -59,8 +60,8 @@ export class CampanhaService {
     title: string,
     image: string,
     description: string,
-    iban:string,
-    goal:number
+    iban: string,
+    goal: number
   ) {
     const campanha: Campanha = {
       id: id,
@@ -68,18 +69,19 @@ export class CampanhaService {
       image: image,
       description: description,
       iban: iban,
-      goal: goal
+      goal: goal,
+      //creator: null
     };
     this.http.put(BACKEND_URL + id, campanha)
-    .subscribe(response => console.log(response));
+      .subscribe(response => console.log(response));
   }
 
   addCampanha(
     title: string,
     image: string,
     description: string,
-    iban:string,
-    goal:number
+    iban: string,
+    goal: number
   ) {
     const campanha: Campanha = {
       id: null,
@@ -87,16 +89,21 @@ export class CampanhaService {
       image,
       description,
       iban,
-      goal
+      goal,
+      //creator: null
     };
     console.log(campanha);
     this.http.post<{ message: string, campanhaId: string }>(BACKEND_URL, campanha)
-    .subscribe(responseData => {
+      .subscribe(responseData => {
         this.router.navigate(['/']);
-    });
+
+      }, error => {
+        error.error.message = 'A campanha já se encontra criada!';
+      });
+
   }
 
-  deleteCampanha(campanhaId: string){
+  deleteCampanha(campanhaId: string) {
     return this.http.delete(BACKEND_URL + campanhaId);
   }
 }

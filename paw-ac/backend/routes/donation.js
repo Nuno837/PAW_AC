@@ -8,6 +8,6 @@ router.post('', DonationController.criarDonation);
 
 router.get('', DonationController.getDonations);
 
-router.get('/:id', DonationController.getDonations);
+router.get('/:id', DonationController.getDonation);
 
 module.exports = router;

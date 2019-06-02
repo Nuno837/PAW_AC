@@ -4,6 +4,8 @@ import { Campanha } from 'src/app/models/campanha.model';
 import { CampanhaService } from 'src/app/services/campanha.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
+import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
 @Component({
   selector: 'app-campanha-create',
@@ -18,11 +20,13 @@ export class CampanhaCreateComponent implements OnInit {
   campanha: Campanha;
   private campanhaId: string;
   private mode = 'create';
+  private authenticationStatusSub: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     public route: ActivatedRoute,
     public campanhaService: CampanhaService,
+    private authenticationService: AuthenticationService
   ) {
     this.criarCampanha = this.formBuilder.group({
       title: ['', [Validators.required]],
@@ -34,11 +38,15 @@ export class CampanhaCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authenticationStatusSub = this.authenticationService.getAuthenticationStatus().subscribe(
+      authenticationStatus => {}
+    );
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
         this.mode = 'edit';
         this.campanhaId = paramMap.get('id');
         this.campanha = this.campanhaService.getCampanha(this.campanhaId);
+  
       } else {
         this.mode = 'create';
         this.campanhaId = null;

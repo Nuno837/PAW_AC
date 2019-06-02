@@ -13,8 +13,8 @@
         </i> Listagem Campanhas</a>
     </li>
     <li>
-      <a routerLink="/create-campanha" *ngIf="(isAuthenticated)" mat-button><i
-          class="material-icons">event_available</i> Criar Campanha</a>
+      <a routerLink="/create-campanha" *ngIf="ifisAdmin()" mat-button><i class="material-icons">event_available</i> Criar
+        Campanha</a>
     </li>
     <button mat-button [matMenuTriggerFor]="menu">
       <i class="material-icons">account_circle</i>
