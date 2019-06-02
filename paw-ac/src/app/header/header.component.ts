@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private authenticationSubs: Subscription;
   private admin: boolean;
+ 
 
   constructor(private authenticationService: AuthenticationService
   ) { }
@@ -23,7 +24,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.admin = false;
 
     this.isAuthenticated = this.authenticationService.getIsAuthenticated();
-
 
 
     this.authenticationSubs = this.authenticationService.getAuthenticationStatus()

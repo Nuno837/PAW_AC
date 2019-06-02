@@ -94,7 +94,7 @@ export class AuthenticationService {
 
   getIsAuthenticated() {
     if (!this.isAuthenticated) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/list-campanha']);
     }
     return this.isAuthenticated;
   }
@@ -139,23 +139,23 @@ export class AuthenticationService {
           this.saveAuthenticationData(token, expirationDate, this.userid);
           if (this.userid === '5cf4538ff10b634b40b766ce') {
             this.admin = true;
-            this.router.navigate(['/']);
+            this.router.navigate(['/list-campanha']);
           } else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/list-campanha']);
           }
         } else {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/list-campanha']);
         }
       }, error => {
         this.authenticationStatus.next(false);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/list-campanha']);
       });
   }
 
   autoAuthenticationUser() {
     const authInformation = this.getAuthenticationData();
     if (!authInformation) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/list-campanha']);
       return;
     }
     const now = new Date();
@@ -171,7 +171,7 @@ export class AuthenticationService {
       }
       this.authenticationStatus.next(true);
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/list-campanha']);
     }
   }
 
