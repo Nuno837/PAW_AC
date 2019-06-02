@@ -4,6 +4,8 @@ import { Campanha } from '../../models/campanha.model';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { Donation } from 'src/app/models/donation.model';
+import { DonationsService } from 'src/app/services/donations.service';
 
 @Component({
   selector: 'app-campanha-list',
@@ -12,6 +14,10 @@ import { AuthenticationService } from 'src/app/authentication/authentication.ser
 })
 export class CampanhaListComponent implements OnInit {
   campanhas: Campanha[] = [];
+
+  donations: Donation[] = [];
+  private donationSub: Subscription;
+
   private campanhaSub: Subscription;
   totalCampanhas = 0;
   campanhaPerPage = 2;
@@ -21,11 +27,12 @@ export class CampanhaListComponent implements OnInit {
   isAuthenticated = false;
   private authenticationSubs: Subscription;
   private admin: boolean;
+  totalDonations = 0;
 
 
 
   constructor(
-    public campanhaService: CampanhaService, private authenticationService: AuthenticationService,
+    public campanhaService: CampanhaService, private authenticationService: AuthenticationService, private donationService: DonationsService,
     private router: Router
   ) { }
 
@@ -40,6 +47,16 @@ export class CampanhaListComponent implements OnInit {
           this.campanhas = campanhaData.campanhas;
         }
       );
+
+    this.donationService.getDonations(this.campanhaPerPage, this.currentPage);
+    this.donationSub = this.donationService
+      .getPostUpdateListener()
+      .subscribe(
+        (donationData: { donations: Donation[]; donationCount: number }) => {
+          this.totalDonations = donationData.donationCount;
+          this.donations = donationData.donations;
+        }
+      )
 
   }
   verifyAuthentication() {
