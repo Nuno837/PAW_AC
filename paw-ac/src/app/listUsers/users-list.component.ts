@@ -3,8 +3,9 @@ import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material';
-import { CampanhaService } from '../services/campanha.service';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { Donation } from '../models/donation.model';
+import { DonationsService } from '../services/donations.service';
 
 @Component({
   selector: 'app-users-list',
@@ -21,10 +22,16 @@ export class UserListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   userId: string;
   totalGasto = 0;
+  donations: Donation[] = [];
+  donationSub: Subscription;
+  totalDonations = 0;
+  totalCampanhas = 0;
+  campanhaPerPage = 2;
+  currentPage = 1;
 
   constructor(
-  private authenticationService: AuthenticationService,
-  private router: Router) { }
+    private authenticationService: AuthenticationService, private donationService: DonationsService,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -34,7 +41,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.userSub = this.authenticationService.getUsersUpdated()
       .subscribe(
         (userData: { users: User[]; userCount: number }) => {
-          this.isLoading = false;
+
           this.totalUsers = userData.userCount;
           this.users = userData.users;
         }
@@ -46,7 +53,18 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authenticationService.getUserId();
       });
+
+    this.donationService.getDonations(this.campanhaPerPage, this.currentPage);
+    this.donationSub = this.donationService
+      .getPostUpdateListener()
+      .subscribe(
+        (donationData: { donations: Donation[]; donationCount: number }) => {
+          this.totalDonations = donationData.donationCount;
+          this.donations = donationData.donations;
+        }
+      )
   }
+
 
   onChangedPage(pageData: PageEvent) {
     this.authenticationService.getUsers();
@@ -58,12 +76,14 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.authenticationService.deleteUser(userId).subscribe(() => {
       this.authenticationService.getUsers();
     }, () => {
-      this.isLoading = false;
     });
   }
+
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
+
+  
 }

@@ -2,20 +2,20 @@
     <h2>Listagem Utilizadores</h2>
   <mat-expansion-panel *ngFor="let user of users">
     <mat-expansion-panel-header>
-        {{ user.nome }}
+        {{ user.username }}
     </mat-expansion-panel-header>
-    <h3>Espaço Reservado:</h3>
+    <h3>Dados:</h3>
     <section>
-        <p> <b>Nome</b> -> {{ user.nome }} </p>
-        <p> <b>Username</b>  ->  {{ user.username }} </p>
+        <p> <b>Nome: </b> {{ user.nome }} </p>
+        <p> <b>Username: </b> {{ user.username }} </p>
     </section>
     <section>
-        <p> <b>Endereço</b> -> {{ user.endereco }}</p>
+        <p> <b>Endereço :</b> {{ user.endereco }}</p>
     </section>
     <section>
-  <p><b>Localização</b> -> {{ user.latlng }}</p>
-  <p><b>IBAN</b> -> {{ user.iban }}</p>
-  <p><b>NIF</b> -> {{ user.nif }}</p>
+  <p><b>Localização: </b>  {{ user.latlng }}</p>
+  <p><b>IBAN: </b>  {{ user.iban }}</p>
+  <p><b>NIF: </b>  {{ user.nif }}</p>
 </section>
   <mat-action-row *ngIf="userIsAuthenticated">
       <button mat-button color="warn" (click)="onDelete(user.id)">DELETE</button>
