@@ -100,3 +100,4 @@ export class CampanhaService {
     return this.http.delete(BACKEND_URL + campanhaId);
   }
 }
+
