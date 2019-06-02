@@ -13,18 +13,22 @@
 
     </section>
 
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="donations.length > 0">
       <mat-expansion-panel-header>
         <h4>Doações efetuadas por:</h4>
-
-
       </mat-expansion-panel-header>
-      <mat-panel-title>
-        <p> </p>
-      </mat-panel-title>
 
+      <mat-expansion-panel *ngFor="let donation of donations ">
+        <mat-expansion-panel-header><h4>{{donation.user}}</h4></mat-expansion-panel-header>
+
+        <section>
+          <p><b>Valor:{{donation.valor}}€</b></p>
+        </section>
+      </mat-expansion-panel>
 
     </mat-expansion-panel>
+    <mat-card class="info-text mat-body-1" *ngIf="donations.length <= 0">Sem Donations Efetuadas</mat-card>
+
     <mat-action-row>
       <button mat-button color="warn" routerLink="/create-don">Fazer Doação</button>
       <a mat-button color="warn" [routerLink]="['/edit', campanha.id]">Editar Campanha</a>
